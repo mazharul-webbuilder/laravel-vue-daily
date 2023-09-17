@@ -20,6 +20,7 @@ class TaskController extends Controller
         $task = Task::create($request->validated());
 
         return TaskResource::make($task);
+
     }
 
 
