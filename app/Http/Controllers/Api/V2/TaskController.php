@@ -10,6 +10,11 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class);
+    }
+
     public function index()
     {
         return TaskResource::collection(auth()->user()->tasks()->get());
@@ -26,11 +31,13 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
+
         return TaskResource::make($task);
     }
 
     public function update(UpdateTaskReqeust $reqeust, Task $task)
     {
+
         $task->update($reqeust->validated());
 
         return TaskResource::make($task);
@@ -38,6 +45,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+
         $task->delete();
 
         return response()->noContent();
