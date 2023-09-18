@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V2;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
@@ -10,14 +10,19 @@ use App\Models\Task;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class);
+    }
+
     public function index()
     {
-        return TaskResource::collection(Task::all());
+        return TaskResource::collection(auth()->user()->tasks()->get());
     }
 
     public function store(TaskRequest $request)
     {
-        $task = Task::create($request->validated());
+        $task = $request->user()->tasks()->create($request->validated());
 
         return TaskResource::make($task);
 
@@ -26,11 +31,13 @@ class TaskController extends Controller
 
     public function show(Task $task)
     {
+
         return TaskResource::make($task);
     }
 
     public function update(UpdateTaskReqeust $reqeust, Task $task)
     {
+
         $task->update($reqeust->validated());
 
         return TaskResource::make($task);
@@ -38,6 +45,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+
         $task->delete();
 
         return response()->noContent();
