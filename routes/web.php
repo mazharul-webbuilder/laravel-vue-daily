@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginWithSocial\LoginWithGoogleController;
 use Illuminate\Support\Facades\Route;
 use  App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -18,3 +19,10 @@ Route::prefix('auth')->group(function (){
 });
 
 Route::get('get-countries-api-data', [ApiController::class, 'getCountriesApiData']);
+
+
+Route::controller(LoginWithGoogleController::class)->group(function(){
+    Route::get('login-with-google', 'loginView');
+    Route::get('authorized/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('authorized/google/callback', 'handleGoogleCallback');
+});
