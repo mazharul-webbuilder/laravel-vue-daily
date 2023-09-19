@@ -16,7 +16,7 @@
                                     <input class="form-check-input mt-0 completed" type="checkbox" />
                                     <div class="ms-2 flex-grow-1" title="Double click the text to edit or remove">
                                         <!-- <div class="relative">
-                                            <input class="editable-task" type="text" />
+                                            <input class="editable-tasks" type="text" />
                                         </div> -->
                                         <span>My First task</span>
                                     </div>

@@ -7,5 +7,5 @@ use App\Http\Controllers\Api\V1\CompletedTaskController;
 
 Route::prefix('v1')->group(function (){
     Route::apiResource('/tasks', TaskController::class);
-    Route::patch('tasks/{task}/completed', CompletedTaskController::class);
+    Route::patch('tasks/{tasks}/completed', CompletedTaskController::class);
 });
