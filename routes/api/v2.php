@@ -7,5 +7,5 @@ use App\Http\Controllers\Api\V2\CompletedTaskController;
 
 Route::middleware('auth:sanctum')->prefix('v2')->group(function (){
     Route::apiResource('/tasks', TaskController::class);
-    Route::patch('tasks/{task}/completed', CompletedTaskController::class);
+    Route::patch('tasks/{tasks}/completed', CompletedTaskController::class);
 });

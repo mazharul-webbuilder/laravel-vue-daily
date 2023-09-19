@@ -46,12 +46,13 @@
         </div>
     </main>
 </template>
-<script setup>
-import { onMounted } from "vue"
-import {allTasks} from  '../http/task-api'
 
+<script setup>
+import {onMounted} from "vue";
+import {allTasks} from "../http/task-api";
 onMounted(async () => {
-    const {data} = await allTasks('tasks')
+    const {data} = await allTasks()
     console.log(data)
+
 })
 </script>
