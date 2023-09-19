@@ -8,21 +8,22 @@
                         <input type="text" class="form-control form-control-lg padding-right-lg"
                                placeholder="+ Add new task. Press enter to save." />
                     </div>
-                    <!-- List of tasks -->
-                    <div class="card mt-2">
-                        <ul class="list-group list-group-flush">
-                            <Task v-for="task in tasks" :task="task" :key="task.id" />
-                        </ul>
-                    </div>
+                    <!-- List of Completed tasks -->
+                    <Tasks :tasks="completedTask"/>
+                    <!-- Toggle Button -->
+
+                    <!-- List of Uncompleted tasks -->
+                    <Tasks :tasks="uncompletedTask"/>
+
                 </div>
             </div>
         </div>
     </main>
 </template>
 <script setup>
-import {onMounted, ref} from "vue"
+import {computed, onMounted, ref} from "vue"
 import {allTasks} from  '../http/tasks-api'
-import Task from "@/components/tasks/Task.vue";
+import Tasks from "@/components/tasks/Tasks.vue";
 
 const tasks = ref([])
 
@@ -30,4 +31,9 @@ onMounted(async () => {
     const {data} = await allTasks()
     tasks.value = data.data
 })
+
+const uncompletedTask = computed(() => tasks.value.filter(task => !task.is_completed))
+const completedTask = computed(() => tasks.value.filter(task => task.is_completed))
+
+
 </script>
