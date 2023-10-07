@@ -14,6 +14,10 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request)
     {
-        $user = User::create($request->getData());
+       User::create($request->getData());
+
+       return response()->json([
+           'message' => 'Registration Successfully'
+       ]);
     }
 }
